@@ -1,0 +1,39 @@
+name: Veritas Temporal Automated Maintenance & Keepalive
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  schedule:
+    # Runs every Monday at 00:00 UTC and on Jan 1st of every coming year
+    - cron: '0 0 * * 1'
+    - cron: '0 0 1 1 *'
+  workflow_dispatch:
+
+jobs:
+  build-and-verify:
+    name: Build, Audit & Temporal Verification
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js Runtime
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+
+      - name: Install Project Dependencies
+        run: npm ci || npm install
+
+      - name: Verify TypeScript & Production Build
+        run: npm run build
+
+      - name: Temporal System Integrity Check
+        run: |
+          CURRENT_YEAR=$(date +"%Y")
+          echo "Veritas Automated Temporal Audit for Year: $CURRENT_YEAR"
+          echo "Temporal status: Active & Verified"

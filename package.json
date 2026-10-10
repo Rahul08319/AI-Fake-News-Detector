@@ -1,7 +1,7 @@
 {
-  "name": "copy-of-veritas:-ai-fake-news-detector",
+  "name": "veritas-ai-fake-news-detector",
   "private": true,
-  "version": "0.0.0",
+  "version": "1.0.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -9,11 +9,14 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@google/genai": "^1.22.0",
+    "canvas-confetti": "^1.9.4",
+    "lucide-react": "^1.55.0",
     "react": "^19.2.0",
-    "react-dom": "^19.2.0",
-    "@google/genai": "^1.22.0"
+    "react-dom": "^19.2.0"
   },
   "devDependencies": {
+    "@types/canvas-confetti": "^1.9.0",
     "@types/node": "^22.14.0",
     "@vitejs/plugin-react": "^5.0.0",
     "typescript": "~5.8.2",

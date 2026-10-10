@@ -1,34 +1,156 @@
-
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="dark scroll-smooth">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Veritas: AI Fake News Detector</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
+    <title>Veritas Pro — Apple-Grade AI Fake News & Misinformation Detector</title>
+    <meta name="description" content="Veritas Pro is an Apple-inspired AI fact-checking intelligence platform. Detect fake news, verify source credibility, and analyze emotional bias in real-time." />
+    <meta name="theme-color" content="#0b0f19" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%230071e3' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z'/%3E%3Cpath d='m9 12 2 2 4-4' stroke='%2330d158'/%3E%3C/svg%3E" />
+
+    <!-- Google Fonts Inter & Outfit -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet" />
+
+    <!-- Tailwind Play CDN & Extensions -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
       tailwind.config = {
+        darkMode: 'class',
         theme: {
           extend: {
+            fontFamily: {
+              sans: [
+                'Inter',
+                '-apple-system',
+                'BlinkMacSystemFont',
+                '"SF Pro Display"',
+                '"SF Pro Text"',
+                '"Helvetica Neue"',
+                'sans-serif'
+              ],
+              display: [
+                '"Plus Jakarta Sans"',
+                'Inter',
+                '-apple-system',
+                'sans-serif'
+              ],
+            },
+            colors: {
+              apple: {
+                blue: '#0071e3',
+                'blue-hover': '#0077ed',
+                indigo: '#5e5ce6',
+                purple: '#bf5af2',
+                emerald: '#30d158',
+                rose: '#ff453a',
+                amber: '#ff9f0a',
+                cyan: '#64d2ff',
+                teal: '#40c8e0',
+              },
+              surface: {
+                darkest: '#070a11',
+                darker: '#0b0f19',
+                card: '#121826',
+                glass: 'rgba(18, 24, 38, 0.72)',
+                glassLight: 'rgba(255, 255, 255, 0.05)',
+                border: 'rgba(255, 255, 255, 0.08)',
+                borderHover: 'rgba(255, 255, 255, 0.18)',
+              }
+            },
+            boxShadow: {
+              'apple-glass': '0 20px 40px -15px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255, 255, 255, 0.08) inset',
+              'apple-glow': '0 0 30px -5px rgba(0, 113, 227, 0.25)',
+              'apple-card': '0 12px 32px -8px rgba(0, 0, 0, 0.4), 0 1px 0 0 rgba(255, 255, 255, 0.1) inset',
+            },
             animation: {
-              'pulse-fast': 'pulse 1.5s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+              'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+              'radar-sweep': 'radar 3s linear infinite',
+              'shimmer': 'shimmer 2.2s infinite linear',
+              'float': 'float 6s ease-in-out infinite',
+              'fade-in': 'fadeIn 0.35s cubic-bezier(0.16, 1, 0.3, 1)',
+            },
+            keyframes: {
+              radar: {
+                '0%': { transform: 'rotate(0deg)' },
+                '100%': { transform: 'rotate(360deg)' },
+              },
+              shimmer: {
+                '0%': { transform: 'translateX(-100%)' },
+                '100%': { transform: 'translateX(100%)' },
+              },
+              float: {
+                '0%, 100%': { transform: 'translateY(0px)' },
+                '50%': { transform: 'translateY(-6px)' },
+              },
+              fadeIn: {
+                '0%': { opacity: '0', transform: 'translateY(8px)' },
+                '100%': { opacity: '1', transform: 'translateY(0)' },
+              }
             }
           }
         }
       }
     </script>
-  <script type="importmap">
-{
-  "imports": {
-    "react/": "https://aistudiocdn.com/react@^19.2.0/",
-    "react": "https://aistudiocdn.com/react@^19.2.0",
-    "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.0/",
-    "@google/genai": "https://aistudiocdn.com/@google/genai@^1.22.0"
-  }
-}
-</script>
-</head>
-  <body class="bg-slate-900 text-slate-100">
+    <style>
+      /* Apple Liquid Glass and Backdrop Blur Styles */
+      body {
+        font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+        text-rendering: optimizeLegibility;
+        -webkit-font-smoothing: antialiased;
+      }
+      
+      .liquid-glass {
+        background: rgba(18, 24, 38, 0.65);
+        backdrop-filter: blur(24px) saturate(190%);
+        -webkit-backdrop-filter: blur(24px) saturate(190%);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+      }
+      
+      .liquid-glass-subtle {
+        background: rgba(255, 255, 255, 0.03);
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+        border: 1px solid rgba(255, 255, 255, 0.06);
+      }
+
+      .specular-border {
+        position: relative;
+      }
+      .specular-border::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 10%;
+        right: 10%;
+        height: 1px;
+        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.25), transparent);
+        pointer-events: none;
+      }
+
+      /* Custom scrollbar matching macOS style */
+      ::-webkit-scrollbar {
+        width: 8px;
+        height: 8px;
+      }
+      ::-webkit-scrollbar-track {
+        background: rgba(11, 15, 25, 0.5);
+      }
+      ::-webkit-scrollbar-thumb {
+        background: rgba(255, 255, 255, 0.15);
+        border-radius: 9999px;
+      }
+      ::-webkit-scrollbar-thumb:hover {
+        background: rgba(255, 255, 255, 0.25);
+      }
+    </style>
+  </head>
+  <body class="bg-[#070a11] text-slate-100 min-h-screen selection:bg-apple-blue selection:text-white antialiased overflow-x-hidden">
     <div id="root"></div>
     <script type="module" src="/index.tsx"></script>
   </body>
